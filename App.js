@@ -18,17 +18,28 @@ import AppPicker from './app/components/AppPicker';
 import LoginScreen from './app/screens/LoginScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import AppText from './app/components/AppText';
-import AppImagePicker from './app/components/AppImagePicker';
+import FormImagePicker from './app/components/forms/FormImagePicker';
 import ImageInput from './app/components/ImageInput';
 import ImageInputList from './app/components/ImageInputList';
 
 export default function App() {
-  const [imageURI, setImageURI] = useState()
+  //const [imageURI, setImageURI] = useState()
+  const [imageURIs, setImageURIs] = useState([])
+
+  const handleAddImage = (uri) => {
+    setImageURIs([...imageURIs, uri]);
+  }
+
+  const handleRemoveImage = (uri) => {
+    setImageURIs(imageURIs.filter(i => i != uri));
+  }
+
   return (
-    <Screen>
-      <ImageInput imageURI={imageURI} onChangeImage={(uri) => setImageURI(uri)} />
-      {/* <ImageInputList imagesURIs={imageURIs} onRemoveImage={(uri) => setImageURI(uri)} /> */}
-    </Screen>
+    <ListingEditScreen />
+    // <Screen>
+    //   {/* <ImageInput imageURI={imageURI} onChangeImage={(uri) => setImageURI(uri)} /> */}
+    //   <ImageInputList imageURIs={imageURIs} onAddImage={uri => handleAddImage(uri)} onRemoveImage={(uri) => handleRemoveImage(uri)} />
+    // </Screen>
 
   );
 }

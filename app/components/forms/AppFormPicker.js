@@ -7,7 +7,8 @@ const AppFormPicker = ({ items, name, width, numOfColumns, PickerItemComponent, 
     const { errors, touched, setFieldValue, values } = useFormikContext();
     return (
         <>
-            <AppPicker numOfColumns={numOfColumns} PickerItemComponent={PickerItemComponent} width={width} items={items} placeholder={placeholder} selectedItem={values[name]} setSelectedItem={(item) => setFieldValue(name, item.label)} />
+            <AppPicker numOfColumns={numOfColumns} PickerItemComponent={PickerItemComponent} width={width} items={items}
+                placeholder={placeholder} selectedItem={values[name]} setSelectedItem={(item) => setFieldValue(name, item.label)} />
             <ErrorMessage message={errors[name]} visible={touched[name]} />
         </>
     );

@@ -1,13 +1,20 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useRef } from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ImageInput from './ImageInput'
 
-const ImageInputList = ({ imagesURIs = [], onRemoveImage, onAddImage }) => {
+const ImageInputList = ({ imageURIs = [], onRemoveImage, onAddImage }) => {
+    const scrollView = useRef();
+
     return (
-        <View style={styles.container}>
-            {imagesURIs.map(i => <ImageInput imageURI={i} key={i} onChangeImage={() => onRemoveImage(i)} />)}
-            <MaterialCommunityIcons name="camera" size={50} />
+        <View>
+            <ScrollView ref={scrollView} horizontal onContentSizeChange={() => scrollView.current.scrollToEnd()}>
+                <View style={styles.container}>
+                    {imageURIs.map(i => <ImageInput imageURI={i} key={i} onChangeImage={() => onRemoveImage(i)} />)}
+                    <ImageInput onChangeImage={uri => onAddImage(uri)} />
+                    {/* <MaterialCommunityIcons name="camera" size={50} /> */}
+                </View>
+            </ScrollView>
         </View>
     )
 }
@@ -15,7 +22,6 @@ const ImageInputList = ({ imagesURIs = [], onRemoveImage, onAddImage }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        flexWrap: 'wrap'
     }
 })
 

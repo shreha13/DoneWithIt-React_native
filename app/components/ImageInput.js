@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
         width: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 20,
+        marginLeft: 15,
+        marginBottom: 15,
         overflow: "hidden"
     },
     image: {
