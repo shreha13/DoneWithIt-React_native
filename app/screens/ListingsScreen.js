@@ -1,31 +1,37 @@
-import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import Card from '../components/Card';
 import ListItem from '../components/listitems/ListItem';
 import ListItemSeparator from '../components/listitems/ListItemSeparator';
+import listingApi from '../api/listings';
 import colors from '../config/colors';
+import routes from '../navigation/routes';
 import Screen from './Screen';
 
-const listings = [
-    {
-        id: 1,
-        title: 'Red jacket for sale',
-        image: require('../assets/jacket.jpg'),
-        subTitle: '$100'
-    },
-    {
-        id: 2,
-        title: 'Couch in great condition',
-        image: require('../assets/couch.jpg'),
-        subTitle: '$1000'
-    }
-]
+const ListingsScreen = ({ navigation }) => {
+    const [listings, setListings] = useState();
+    const [loading, setLoading] = useState(false);
 
-const ListingsScreen = (props) => {
+    const getListings = async () => {
+        setLoading(true);
+        const response = await listingApi.getListings();
+        setLoading(false);
+        if (response.ok) {
+            setListings(response.data);
+        } else {
+            console.log(response.problem);
+        }
+    }
+
+    useEffect(() => {
+        getListings()
+    }, [])
     return (
         <Screen style={styles.screen}>
+            <ActivityIndicator animating={loading} size="large" />
             <FlatList ItemSeparatorComponent={ListItemSeparator} data={listings} keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <Card title={item.title} image={item.image} price={item.subTitle} />} />
+                renderItem={({ item }) =>
+                    <Card onPress={() => navigation.navigate(routes.LISTING_DETAIL, { item: { ...item, image: item.images[0].url } })} title={item.title} image={item.images[0].url} price={item.price} />} />
         </Screen>
     );
 }

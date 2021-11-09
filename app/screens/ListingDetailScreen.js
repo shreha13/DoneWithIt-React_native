@@ -4,13 +4,14 @@ import AppText from '../components/AppText'
 import ListItem from '../components/listitems/ListItem'
 import colors from '../config/colors'
 
-const ListingDetailScreen = ({ image, title, price, listImage, listName, totalListing }) => {
+const ListingDetailScreen = ({ route }) => {
+    const { image, title, price, listImage, listName, totalListing } = route.params.item;
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={image} resizeMode="cover" />
+            <Image style={styles.image} source={{ uri: image }} resizeMode="cover" />
             <View style={styles.textContainer}>
                 <AppText style={styles.title}>{title}</AppText>
-                <AppText style={styles.price}>{price}</AppText>
+                <AppText style={styles.price}>${price}</AppText>
             </View>
             <ListItem onPress={() => console.log()} image={listImage} title={listName} subTitle={totalListing} />
         </View>

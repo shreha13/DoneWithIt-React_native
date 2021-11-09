@@ -1,45 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import * as ImagePicker from 'expo-image-picker';
-import { Button, Image, SafeAreaView, View } from 'react-native';
-import Card from './app/components/Card';
-import Icon from './app/components/Icon';
-import AppTextInput from './app/components/AppTextInput';
-import ListItem from './app/components/listitems/ListItem';
-import colors from './app/config/colors';
-import AccountScreen from './app/screens/AccountScreen';
-import ListingDetailScreen from './app/screens/ListingDetailScreen';
-import ListingsScreen from './app/screens/ListingsScreen';
-import MessageScreen from './app/screens/MessageScreen';
-import Screen from './app/screens/Screen';
-import ViewImageScreen from './app/screens/ViewImageScreen';
-import WelcomeScreen from './app/screens/WelcomeScreen';
-import AppPicker from './app/components/AppPicker';
-import LoginScreen from './app/screens/LoginScreen';
-import ListingEditScreen from './app/screens/ListingEditScreen';
-import AppText from './app/components/AppText';
-import FormImagePicker from './app/components/forms/FormImagePicker';
-import ImageInput from './app/components/ImageInput';
-import ImageInputList from './app/components/ImageInputList';
+import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import AppNavigator from './app/navigation/AppNavigator';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import NavigationTheme from './app/navigation/NavigationTheme';
+import RegisterScreen from './app/screens/RegisterScreen';
+import Screen from './app/screens/Screen'
+
 
 export default function App() {
-  //const [imageURI, setImageURI] = useState()
-  const [imageURIs, setImageURIs] = useState([])
-
-  const handleAddImage = (uri) => {
-    setImageURIs([...imageURIs, uri]);
-  }
-
-  const handleRemoveImage = (uri) => {
-    setImageURIs(imageURIs.filter(i => i != uri));
-  }
 
   return (
-    <ListingEditScreen />
-    // <Screen>
-    //   {/* <ImageInput imageURI={imageURI} onChangeImage={(uri) => setImageURI(uri)} /> */}
-    //   <ImageInputList imageURIs={imageURIs} onAddImage={uri => handleAddImage(uri)} onRemoveImage={(uri) => handleRemoveImage(uri)} />
-    // </Screen>
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
 
   );
 }

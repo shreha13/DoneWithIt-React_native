@@ -3,7 +3,7 @@ import { Button, ImageBackground, StyleSheet, Text, View, Dimensions, Image } fr
 import AppButton from '../components/AppButton'
 import colors from '../config/colors'
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
     return (
         <ImageBackground blurRadius={5} source={require('../assets/background.jpg')} style={styles.background}>
             <View style={styles.banner}>
@@ -12,8 +12,8 @@ const WelcomeScreen = () => {
             </View>
             <View style={styles.buttons}>
 
-                <AppButton title="Login" onPress={() => alert("Login")} />
-                <AppButton title="Register" color="secondary" onPress={() => alert("Register")} />
+                <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
+                <AppButton title="Register" color="secondary" onPress={() => navigation.navigate("Register")} />
             </View>
             <View style={styles.registerButton} />
         </ImageBackground>

@@ -3,13 +3,13 @@ import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import colors from '../config/colors'
 import AppText from './AppText'
 
-const Card = ({ title, price, image }) => {
+const Card = ({ title, price, image, onPress }) => {
     return (
-        <TouchableOpacity style={styles.cardContainer}>
-            <Image style={styles.image} source={image} />
+        <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
+            <Image style={styles.image} source={{ uri: image }} />
             <View style={styles.textContainer}>
                 <AppText style={{ fontWeight: "bold", color: colors.black }}>{title}</AppText>
-                <AppText style={{ fontWeight: "bold", marginTop: 10, color: colors.secondary }}>{price}</AppText>
+                <AppText style={{ fontWeight: "bold", marginTop: 10, color: colors.secondary }}>${price}</AppText>
             </View>
         </TouchableOpacity>
     )
